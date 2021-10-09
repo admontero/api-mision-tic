@@ -1,36 +1,43 @@
 require('dotenv').config({ path: '.env' });
 const chalk = require('chalk');
 const express = require('express');
+const connectDB = require('./config/database');
 
 const app = express();
+
+//Conectamos la base de datos
+connectDB();
 
 app.use(express.json({ extended: true }));
 
 //Puerto de la app
 const PORT = process.env.PORT
 
+//Importamos rutas
+app.use('/api/productos', require('./routes/products'));
+
 //post, put, delete, patch
 app.get('/', (req, res) => {
     res.send('Hola mundo desde endpoint');
 });
 
-app.get('/productos', (req, res) => {
+/* app.get('/productos', (req, res) => {
     res.send('Aquí van todos los productos');
-});
+}); */
 
-app.get('/usuarios', (req, res) => {
+/* app.get('/usuarios', (req, res) => {
     res.send('Aquí van todos los usuarios');
-});
+}); */
 
-app.get('/ventas', (req, res) => {
+/* app.get('/ventas', (req, res) => {
     res.send('Aquí van todas las ventas');
-});
+}); */
 
 //Ruta con parámetros
-app.get('/hola/:name', (req, res) => {
+/* app.get('/hola/:name', (req, res) => {
     const name = req.params.name;
     res.send(`Hola ${name}`);
-});
+}); */
 
 //Toma cualquier ruta no definida
 app.get('*', (req, res) => {
