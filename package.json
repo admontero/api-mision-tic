@@ -1,0 +1,28 @@
+{
+  "name": "api-mision-tic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "watch": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/admontero/api-mision-tic.git"
+  },
+  "author": "CodeBox",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/admontero/api-mision-tic/issues"
+  },
+  "homepage": "https://github.com/admontero/api-mision-tic#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1"
+  }
+}
