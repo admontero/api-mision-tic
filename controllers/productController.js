@@ -39,12 +39,12 @@ exports.create = async (req, res) => {
 };
 
 exports.read = async (req, res) => {
+    const idByParam = req.params.id;
+    const id = req.query.id;
+    const description = req.query.description;
+    const filter = {};
+
     try {
-        const idByParam = req.params.id;
-        const id = req.query.id;
-        const description = req.query.description;
-        const filter = {};
-        
         //Cuando se pase como parametro el id
         if (idByParam) {
             filter._id = idByParam;
@@ -86,3 +86,30 @@ exports.read = async (req, res) => {
         res.status(500).send('Error desde el servidor');
     }
 };
+
+exports.update = async (req, res) => {
+    const id = req.params.id;
+
+    if (!id) {
+        return res.status(400).send({ error: 'Ingrese un id de producto válido' });
+    }
+ 
+    try {        
+        Product.updateOne({ _id: id }, req.body, (error, result) => {
+            if (error) {
+                return res.status(500).send({ error });
+            }
+
+            Product.find({ _id: id }, (error, result) => {
+                if (error) {
+                    return res.status(500).send({ error });
+                }
+
+                return res.send(result);
+            });
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Error desde el servidor');
+    }
+}

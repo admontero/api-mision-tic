@@ -49,7 +49,34 @@ router.get('/?description', productController.read);
 router.get('/:id', productController.read);
 
 //Actualizar producto
-
-//Eliminar producto
+router.patch('/:id',
+    [
+        check('name', 'El nombre es obligatorio')
+            .not()
+            .isEmpty(),
+        check('brand', 'La marca es requerida')
+            .not()
+            .isEmpty(),
+        check('description', 'La descripción es requerida')
+            .not()
+            .isEmpty(),
+        check('stock')
+            .not()
+            .isEmpty()
+            .withMessage('La cantidad es obligatoria')
+            .isNumeric()
+            .withMessage('La cantidad debe ser numérica'),
+        check('price')
+            .not()
+            .isEmpty()
+            .withMessage('El precio es requerido')
+            .isNumeric()
+            .withMessage('El precio debe ser numérico'),
+        check('iva', 'Seleccionar si el producto cuenta con iva es obligatorio')
+            .not()
+            .isEmpty(),
+    ],
+    productController.update
+);
 
 module.exports = router;
