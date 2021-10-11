@@ -40,6 +40,11 @@ router.post('/',
 );
 
 //Ver productos
+router.get('/', productController.read);
+//Ver productos filtrados por id
+router.get('/?id', productController.read);
+//Ver productos filtrados por descripción
+router.get('/?description', productController.read);
 
 //Actualizar producto
 

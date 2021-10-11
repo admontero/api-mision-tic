@@ -34,6 +34,44 @@ exports.create = async (req, res) => {
         res.json(product);
     } catch (error) {
         console.log(error);
-        res.status(500).send('Error del servidor');
+        res.status(500).send('Error desde el servidor');
+    }
+};
+
+exports.read = async (req, res) => {
+    try {
+        const id = req.query.id;
+        const description = req.query.description;
+        const products = await Product.find({});
+
+        //Cuando el usuario busque por id
+        if (id) {
+            const productsFiltered = products.filter(product => product._id.toLowerCase().includes(id.toLowerCase()));
+            return res.send({
+                status: 'OK',
+                count: productsFiltered.length,
+                products: productsFiltered
+            });
+        }
+
+        //Cuando el usuario busque por descripción
+        if (description) {
+            const productsFiltered = products.filter(product => product.description.toLowerCase().includes(description.toLowerCase()));
+            return res.send({
+                status: 'OK',
+                count: productsFiltered.length,
+                products: productsFiltered
+            });
+        }
+
+        //Retorna todos los productos
+        return res.send({
+            status: 'OK',
+            count: products.length,
+            products: products 
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Error desde el servidor');
     }
 };
