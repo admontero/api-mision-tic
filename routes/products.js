@@ -45,6 +45,8 @@ router.get('/', productController.read);
 router.get('/?id', productController.read);
 //Ver productos filtrados por descripción
 router.get('/?description', productController.read);
+//Ver un producto
+router.get('/:id', productController.read);
 
 //Actualizar producto
 

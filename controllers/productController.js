@@ -40,36 +40,47 @@ exports.create = async (req, res) => {
 
 exports.read = async (req, res) => {
     try {
+        const idByParam = req.params.id;
         const id = req.query.id;
         const description = req.query.description;
-        const products = await Product.find({});
+        const filter = {};
+        
+        //Cuando se pase como parametro el id
+        if (idByParam) {
+            filter._id = idByParam;
+            const result = await Product.find(filter);
+            return res.json(result);
+        } else {
+            const products = await Product.find(filter);
 
-        //Cuando el usuario busque por id
-        if (id) {
-            const productsFiltered = products.filter(product => product._id.toLowerCase().includes(id.toLowerCase()));
+            //Cuando el usuario busque por id
+            if (id) {
+                const productsFiltered = products.filter(product => product._id.toLowerCase().includes(id.toLowerCase()));
+                return res.send({
+                    status: 'OK',
+                    count: productsFiltered.length,
+                    products: productsFiltered
+                });
+            }
+    
+            //Cuando el usuario busque por descripción
+            if (description) {
+                const productsFiltered = products.filter(product => product.description.toLowerCase().includes(description.toLowerCase()));
+                return res.send({
+                    status: 'OK',
+                    count: productsFiltered.length,
+                    products: productsFiltered
+                });
+            }
+    
+            //Retorna todos los productos
             return res.send({
                 status: 'OK',
-                count: productsFiltered.length,
-                products: productsFiltered
+                count: products.length,
+                products: products 
             });
         }
 
-        //Cuando el usuario busque por descripción
-        if (description) {
-            const productsFiltered = products.filter(product => product.description.toLowerCase().includes(description.toLowerCase()));
-            return res.send({
-                status: 'OK',
-                count: productsFiltered.length,
-                products: productsFiltered
-            });
-        }
-
-        //Retorna todos los productos
-        return res.send({
-            status: 'OK',
-            count: products.length,
-            products: products 
-        });
     } catch (error) {
         console.log(error);
         res.status(500).send('Error desde el servidor');
