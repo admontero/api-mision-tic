@@ -88,6 +88,13 @@ exports.read = async (req, res) => {
 };
 
 exports.update = async (req, res) => {
+
+    //Revisamos si hay errores de validación
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     const id = req.params.id;
 
     if (!id) {
