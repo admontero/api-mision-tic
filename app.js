@@ -15,6 +15,7 @@ const PORT = process.env.PORT
 
 //Importamos rutas
 app.use('/api/productos', require('./routes/products'));
+app.use('/api/usuarios', require('./routes/users'));
 app.use('/api/ventas', require('./routes/purchases'));
 
 //post, put, delete, patch
