@@ -37,9 +37,16 @@ router.post('/',
 );
 
 //Ver ventas
+router.get('/', purchaseController.read);
+//Ver ventas filtrados por id de venta
+router.get('/?idVenta', purchaseController.read);
+//Ver ventas filtrados por id de cliente
+router.get('/?idCliente', purchaseController.read);
+//Ver ventas filtrados por nombre de cliente
+router.get('/?nameCliente', purchaseController.read);
+//Ver una venta
+router.get('/:id', purchaseController.read);
 
 //Actualizar venta
-
-//Eliminar venta
 
 module.exports = router;

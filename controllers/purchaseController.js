@@ -1,6 +1,10 @@
 const Purchase = require('../models/Purchase');
 const { validationResult } = require('express-validator');
 
+const removeAccents = (str) => {
+return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+} 
+
 exports.create = async (req, res) => {
 
     //Revisamos si hay errores de validación
@@ -31,5 +35,65 @@ exports.create = async (req, res) => {
     } catch (error) {
         console.log(error);
         res.status(500).send('Error en el servidor');
+    }
+};
+
+exports.read = async (req, res) => {
+    const idByParam = req.params.id;
+    const idVenta = req.query.idVenta;
+    const idCliente = req.query.idCliente;
+    const nameCliente = req.query.nameCliente;
+    const filter = {};
+
+    try {
+        //Cuando se pase como parametro el id
+        if (idByParam) {
+            filter._id = idByParam;
+            const result = await Purchase.find(filter);
+            return res.json(result);
+        } else {
+            const purchases = await Purchase.find(filter);
+
+            //Cuando el usuario busque por id de venta
+            if (idVenta) {
+                const purchasesFiltered = purchases.filter(purchase => purchase._id.toLowerCase().includes(idVenta.toLowerCase()));
+                return res.send({
+                    status: 'OK',
+                    count: purchasesFiltered.length,
+                    purchases: purchasesFiltered
+                });
+            
+            }
+            //Cuando el usuario busque por id de cliente
+            if (idCliente) {
+                const purchasesFiltered = purchases.filter(purchase => purchase.client_id.toString().includes(idCliente));
+                return res.send({
+                    status: 'OK',
+                    count: purchasesFiltered.length,
+                    purchases: purchasesFiltered
+                });
+            }
+    
+            //Cuando el usuario busque por descripción
+            if (nameCliente) {
+                const purchasesFiltered = purchases.filter(purchase => removeAccents(purchase.client_name.toLowerCase()).includes(nameCliente.toLowerCase()));
+                return res.send({
+                    status: 'OK',
+                    count: purchasesFiltered.length,
+                    purchases: purchasesFiltered
+                });
+            }
+    
+            //Retorna todos los productos
+            return res.send({
+                status: 'OK',
+                count: purchases.length,
+                purchases: purchases 
+            });
+        }
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Error desde el servidor');
     }
 };
