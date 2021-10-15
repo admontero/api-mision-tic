@@ -1,9 +1,12 @@
 require('dotenv').config({ path: '.env' });
 const chalk = require('chalk');
 const express = require('express');
+const cors = require('cors');
 const connectDB = require('./config/database');
 
 const app = express();
+
+app.use(cors());
 
 //Conectamos la base de datos
 connectDB();
