@@ -37,7 +37,7 @@ const PurchaseSchema = mongoose.Schema({
                 type: mongoose.Schema.Types.String,
                 ref: 'Product'
             },
-            quantity: {
+            product_quantity: {
                 type: Number,
                 required: true
             }

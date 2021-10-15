@@ -48,5 +48,31 @@ router.get('/?nameCliente', purchaseController.read);
 router.get('/:id', purchaseController.read);
 
 //Actualizar venta
+router.patch('/:id',
+    [
+        check('date')
+            .not()
+            .isEmpty()
+            .withMessage('La fecha es obligatoria')
+            .isDate()
+            .withMessage('La fecha debe ser válida'),
+        check('tax')
+            .not()
+            .isEmpty()
+            .withMessage('El impuesto es obligatorio')
+            .isNumeric()
+            .withMessage('El impuesto debe ser numérico'),
+        check('client_id')
+            .not()
+            .isEmpty()
+            .withMessage('El ID del cliente es obligatorio')
+            .isNumeric()
+            .withMessage('El ID solo tiene números permitidos'),
+        check('client_name', 'El nombre del cliente es obligatorio')
+            .not()
+            .isEmpty(),
+    ],
+    purchaseController.update
+);
 
 module.exports = router;
