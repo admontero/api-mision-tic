@@ -1,10 +1,13 @@
 require('dotenv').config({ path: '.env' });
 const chalk = require('chalk');
 const express = require('express');
+const cors = require('cors')
 const connectDB = require('./config/database');
 
-const app = express();
 
+
+const app = express();
+app.use(cors());
 //Conectamos la base de datos
 connectDB();
 
@@ -14,12 +17,13 @@ app.use(express.json({ extended: true }));
 const PORT = process.env.PORT
 
 //Importamos rutas
-app.use('/api/productos', require('./routes/products'));
+app.use('/api/productos', require('./routes/products'))
+app.use('/api/usuarios', require('./routes/user'))
 
 //post, put, delete, patch
-app.get('/', (req, res) => {
-    res.send('Hola mundo desde endpoint');
-});
+//app.get('/', (req, res) => {
+    //res.send('Hola mundo desde endpoint');
+//});
 
 /* app.get('/productos', (req, res) => {
     res.send('Aquí van todos los productos');

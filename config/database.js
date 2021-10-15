@@ -3,7 +3,7 @@ require('dotenv').config({ path: '.env' });
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.DB_MONGO);
+        await mongoose.connect('mongodb+srv://admin:admin@cluster0.4noaq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
         console.log('Base de datos conectada');
     } catch (error) {
         console.log(error)
