@@ -32,7 +32,7 @@ router.post('/',
             .withMessage('El precio es requerido')
             .isNumeric()
             .withMessage('El precio debe ser numérico'),
-        check('iva', 'Seleccionar si el producto cuenta con iva es obligatorio')
+        check('status', 'Seleccionar el status del producto es obligatorio')
             .not()
             .isEmpty(),
     ],
@@ -72,7 +72,7 @@ router.patch('/:id',
             .withMessage('El precio es requerido')
             .isNumeric()
             .withMessage('El precio debe ser numérico'),
-        check('iva', 'Seleccionar si el producto cuenta con iva es obligatorio')
+        check('status', 'Seleccionar el status del producto es obligatorio')
             .not()
             .isEmpty(),
     ],

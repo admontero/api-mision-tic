@@ -25,12 +25,13 @@ const ProductSchema = mongoose.Schema({
         required: true,
     },
     price: {
-        type: Number,
+        type: String,
         required: true,
     },
-    iva: {
-        type: Boolean,
+    status: {
+        type: String,
         required: true,
+        enum: ['disponible', 'no disponible']
     }
 });
 
