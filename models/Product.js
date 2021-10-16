@@ -5,24 +5,10 @@ const ProductSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    name: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    brand: {
-        type: String,
-        required: true,
-        trim: true
-    },
     description: {
         type: String,
         required: true,
         trim: true
-    },
-    stock: {
-        type: Number,
-        required: true,
     },
     price: {
         type: String,

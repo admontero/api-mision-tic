@@ -10,7 +10,7 @@ exports.create = async (req, res) => {
     }
 
     //Aplicamos destructuring al objeto
-    const { _id, price, stock } = req.body;
+    const { _id, price } = req.body;
 
     //Validamos que el product_id sea único
     let productExists = await Product.findOne({ _id });
@@ -18,8 +18,8 @@ exports.create = async (req, res) => {
         return res.status(400).json({ msg: 'El ID del producto debe ser único' });
     }
 
-    if (price < 0 || stock < 0) {
-        return res.status(400).json({ msg: 'El precio y stock del producto deben ser mayor o igual 0' });
+    if (price < 0) {
+        return res.status(400).json({ msg: 'El precio del producto deben ser mayor o igual 0' });
     }
     
     try {

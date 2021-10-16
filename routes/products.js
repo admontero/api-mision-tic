@@ -11,21 +11,9 @@ router.post('/',
         check('_id', 'El identificador es obligatorio')
             .not()
             .isEmpty(),
-        check('name', 'El nombre es obligatorio')
-            .not()
-            .isEmpty(),
-        check('brand', 'La marca es requerida')
-            .not()
-            .isEmpty(),
         check('description', 'La descripción es requerida')
             .not()
             .isEmpty(),
-        check('stock')
-            .not()
-            .isEmpty()
-            .withMessage('La cantidad es obligatoria')
-            .isNumeric()
-            .withMessage('La cantidad debe ser numérica'),
         check('price')
             .not()
             .isEmpty()
@@ -51,21 +39,9 @@ router.get('/:id', productController.read);
 //Actualizar producto
 router.patch('/:id',
     [
-        check('name', 'El nombre es obligatorio')
-            .not()
-            .isEmpty(),
-        check('brand', 'La marca es requerida')
-            .not()
-            .isEmpty(),
         check('description', 'La descripción es requerida')
             .not()
             .isEmpty(),
-        check('stock')
-            .not()
-            .isEmpty()
-            .withMessage('La cantidad es obligatoria')
-            .isNumeric()
-            .withMessage('La cantidad debe ser numérica'),
         check('price')
             .not()
             .isEmpty()

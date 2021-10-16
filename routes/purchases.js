@@ -17,12 +17,6 @@ router.post('/',
             .withMessage('La fecha es obligatoria')
             .isDate()
             .withMessage('La fecha debe ser válida'),
-        check('tax')
-            .not()
-            .isEmpty()
-            .withMessage('El impuesto es obligatorio')
-            .isNumeric()
-            .withMessage('El impuesto debe ser numérico'),
         check('client_id')
             .not()
             .isEmpty()
@@ -56,12 +50,6 @@ router.patch('/:id',
             .withMessage('La fecha es obligatoria')
             .isDate()
             .withMessage('La fecha debe ser válida'),
-        check('tax')
-            .not()
-            .isEmpty()
-            .withMessage('El impuesto es obligatorio')
-            .isNumeric()
-            .withMessage('El impuesto debe ser numérico'),
         check('client_id')
             .not()
             .isEmpty()

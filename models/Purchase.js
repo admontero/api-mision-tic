@@ -9,13 +9,14 @@ const PurchaseSchema = mongoose.Schema({
         type: Date,
         required: true,
     },
-    tax: {
-        type: Number,
-        required: true
+    total: {
+        type: String,
+        required: true,
     },
-    discount: {
-        type: Number,
-        default: 0
+    status: {
+        type: String,
+        required: true,
+        enum: ['en proceso', 'cancelada', 'entregada']
     },
     client_id: {
         type: Number,
@@ -25,12 +26,6 @@ const PurchaseSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    client_email: {
-        type: String
-    },
-    client_telephone: {
-        type: Number,
-    },
     products: [
         {
             product_id: {
@@ -39,6 +34,10 @@ const PurchaseSchema = mongoose.Schema({
             },
             product_quantity: {
                 type: Number,
+                required: true
+            },
+            product_price: {
+                type: String,
                 required: true
             }
         }
