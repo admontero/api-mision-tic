@@ -10,7 +10,7 @@ const PurchaseSchema = mongoose.Schema({
         required: true,
     },
     total: {
-        type: String,
+        type: Number,
         required: true,
     },
     status: {
@@ -37,7 +37,7 @@ const PurchaseSchema = mongoose.Schema({
                 required: true
             },
             product_price: {
-                type: String,
+                type: Number,
                 required: true
             }
         }
