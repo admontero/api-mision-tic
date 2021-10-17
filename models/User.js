@@ -17,16 +17,15 @@ const UserSchema = mongoose.Schema({
     },
     imageUrl: {
         type: String,
-        required: true,
         trim: true
     },
     role: {
         type: String,
-        required: true,
+        default: ''
     },
     status: {
         type: String,
-        required: true,
+        default: 'pendiente',
         enum: ['pendiente', 'autorizado', 'no autorizado']
     }
 });

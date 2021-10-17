@@ -5,6 +5,22 @@ const { check } = require('express-validator');
 
 // La ruta base sería api/usuarios
 
+//Crear usuario
+router.post('/',
+    [
+        check('_id', 'El identificador es obligatorio')
+            .not()
+            .isEmpty(),
+        check('name', 'El nombre es obligatorio')
+            .not()
+            .isEmpty(),
+        check('email', 'La descripción es requerida')
+            .not()
+            .isEmpty()
+    ],
+    userController.create
+);
+
 //Ver usuarios
 router.get('/', userController.read);
 //Ver un usuario
