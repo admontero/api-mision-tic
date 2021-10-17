@@ -1,63 +1,62 @@
 const User = require('../models/User');
+const { validationResult } = require('express-validator');
 
-const UserCtr = {};
+exports.read = async (req, res) => {
+    const id = req.params.id;
+    const filter = {};
 
+    try {
+        //Cuando se pase como parametro el id
+        if (id) {
+            filter._id = id;
+            const result = await User.find(filter);
+            return res.json(result);
+        } else {
+            const users = await User.find(filter);
 
-UserCtr.getUsers= async (req, res) => {
-    const user = await User.find();
-    res.json(user)
-}
-
-UserCtr.createUser= async(req, res) => { 
-    const {_id,name,role,email,user,password,state} = req.body;
-    const newUser = new User(
-        {
-            _id,
-            name,
-            role,
-            email,
-            user,
-            password,
-            state
+            //Retorna todos los usuarios
+            return res.send({
+                status: 'OK',
+                count: users.length,
+                users: users 
+            });
         }
-    )
-    await newUser.save();
-    res.json({message:`usuario con nombre ${newUser.name}, ha sido guardada`})
-}
 
-UserCtr.getUser = async(req,res) =>{
-    const user = await User.findById(req.params.id);
-    res.json(user)
-}
-
-UserCtr.deleteUser = async (req, res) => {
-    await User.findByIdAndDelete(req.params.id);
-    res.json({message:'user-delete'})
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Error desde el servidor');
+    }
 };
 
-UserCtr.updateUser = async (req, res) => {
-    const {    
-        name,
-        role,
-        email,
-        user,
-        password,
-        state
-    } = req.body;
-    
-    await User.findOneAndUpdate({_id:req.params.id},
-        {
-            name,
-            role,
-            email,
-            user,
-            password,
-            state  
-        }
-    )
-    res.json({message:'user-update'})
-}
+exports.update = async (req, res) => {
+    //Revisamos si hay errores de validación
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
 
+    const id = req.params.id;
 
+    if (!id) {
+        return res.status(400).send({ error: 'Ingrese un id de usuario válido' });
+    }
+ 
+    try {        
+        User.updateOne({ _id: id }, req.body, (error, result) => {
+            if (error) {
+                return res.status(500).send({ error });
+            }
 
-module.exports = UserCtr;
+            User.find({ _id: id }, (error, result) => {
+                if (error) {
+                    return res.status(500).send({ error });
+                }
+
+                return res.send(result);
+            });
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Error desde el servidor');
+    }
+};

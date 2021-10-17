@@ -1,26 +1,23 @@
 const mongoose = require('mongoose');
 
 const ProductSchema = mongoose.Schema({
-    _id:{
-        type:String,
-        required: true,
+    _id: {
+        type: String,
+        required: true
     },
-    
-    
-    name: {
+    description: {
         type: String,
         required: true,
         trim: true
     },
-   
-    stock: {
-        type: String,
-        default: "0"
+    price: {
+        type: Number,
+        required: true,
     },
-
-    brand: {
+    status: {
         type: String,
-        required: true
+        required: true,
+        enum: ['disponible', 'no disponible']
     }
 });
 

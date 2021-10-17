@@ -1,0 +1,265 @@
+{
+	"info": {
+		"_postman_id": "7efd1c50-d7dd-47e2-82d1-4f02fa15e1a7",
+		"name": "API MINTIC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear producto",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"_id\": \"TEC-011\",\r\n    \"name\": \"Smart TV\",\r\n    \"brand\": \"Sony\",\r\n    \"description\": \"Televisor inteligente OLED de 42 pulgadas con sonido envolvente\",\r\n    \"stock\": 15,\r\n    \"price\": 2500000,\r\n    \"iva\": false\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/productos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"productos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listado de productos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/productos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"productos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filtrado por id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/productos?id=tec-01",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"productos"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "tec-01"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filtrado por descripción",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/productos?description=mandos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"productos"
+					],
+					"query": [
+						{
+							"key": "description",
+							"value": "mandos"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ver un producto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/productos/TEC-011",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"productos",
+						"TEC-011"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar producto",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Xbox Series X\",\r\n    \"brand\": \"Microsoft\",\r\n    \"description\": \"Consola de videojuegos de última generación con edición especial del juego Halo Infinite\",\r\n    \"stock\": 30,\r\n    \"price\": 2200000,\r\n    \"iva\": true\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/productos/TEC-028",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"productos",
+						"TEC-028"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listado de usuarios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/usuarios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ver un usuario",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/usuarios/100464615812201614960",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"usuarios",
+						"100464615812201614960"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar usuario",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"role\": \"Vendedor\",\r\n    \"status\": true\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/usuarios/100264635012201617968",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"usuarios",
+						"100264635012201617968"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear venta",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"_id\": \"VEN-002\",\r\n    \"date\": \"2021-10-10\",\r\n    \"tax\": 16,\r\n    \"discount\": 0,\r\n    \"client_id\": 1065838737,\r\n    \"client_name\": \"Ivan Montero\",\r\n    \"client_email\": \"correo2@correo2.com\",\r\n    \"client_telephone\": 3013037955,\r\n    \"products\": [\r\n        {\r\n            \"product_id\": \"TEC-028\",\r\n            \"quantity\": 8\r\n        },\r\n        {\r\n            \"product_id\": \"TEC-011\",\r\n            \"quantity\": 2\r\n        }\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/ventas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"ventas"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
