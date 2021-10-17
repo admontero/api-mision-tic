@@ -4,6 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/database');
 
+const app = express();
 
 app.use(cors());
 
@@ -21,9 +22,9 @@ app.use('/api/usuarios', require('./routes/users'));
 app.use('/api/ventas', require('./routes/purchases'));
 
 //post, put, delete, patch
-//app.get('/', (req, res) => {
-    //res.send('Hola mundo desde endpoint');
-//});
+app.get('/', (req, res) => {
+    res.send('Hola mundo desde endpoint');
+});
 
 /* app.get('/productos', (req, res) => {
     res.send('Aquí van todos los productos');
