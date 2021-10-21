@@ -1,10 +1,16 @@
 const { Router } = require('express');
 const router = Router();
 const authController = require('../controllers/authController');
-//const { check } = require('express-validator');
+const auth = require('../middleware/auth');
 
 router.post(
     '/googlelogin', authController.googleLogin
+);
+
+//Devolver usuario autenticado
+router.get('/auth', 
+    auth,
+    authController.userAuthenticated
 );
 
 module.exports = router;

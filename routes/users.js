@@ -2,11 +2,13 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
 const { check } = require('express-validator');
+const auth = require('../middleware/auth');
 
 // La ruta base sería api/usuarios
 
 //Crear usuario
 router.post('/',
+    auth,
     [
         check('_id', 'El identificador es obligatorio')
             .not()
@@ -22,12 +24,19 @@ router.post('/',
 );
 
 //Ver usuarios
-router.get('/', userController.read);
+router.get('/', 
+    auth,
+    userController.read
+);
 //Ver un usuario
-router.get('/:id', userController.read);
+router.get('/:id', 
+    auth,
+    userController.read
+);
 
 //Actualizar usuario
 router.patch('/:id',
+    auth,
     [
         check('role', 'El rol del usuario es obligatorio')
             .not()

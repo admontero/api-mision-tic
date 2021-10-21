@@ -2,11 +2,13 @@ const express = require('express');
 const router = express.Router();
 const purchaseController = require('../controllers/purchaseController');
 const { check } = require('express-validator');
+const auth = require('../middleware/auth');
 
 // La ruta base sería api/ventas
 
 //Crear venta
 router.post('/',
+    auth,
     [
         check('_id', 'El identificador es obligatorio')
             .not()
@@ -31,18 +33,34 @@ router.post('/',
 );
 
 //Ver ventas
-router.get('/', purchaseController.read);
+router.get('/', 
+    auth,
+    purchaseController.read
+);
 //Ver ventas filtrados por id de venta
-router.get('/?idVenta', purchaseController.read);
+router.get('/?idVenta', 
+    auth,
+    purchaseController.read
+);
 //Ver ventas filtrados por id de cliente
-router.get('/?idCliente', purchaseController.read);
+router.get('/?idCliente', 
+    auth,
+    purchaseController.read
+);
 //Ver ventas filtrados por nombre de cliente
-router.get('/?nameCliente', purchaseController.read);
+router.get('/?nameCliente', 
+    auth,
+    purchaseController.read
+);
 //Ver una venta
-router.get('/:id', purchaseController.read);
+router.get('/:id', 
+    auth, 
+    purchaseController.read
+);
 
 //Actualizar venta
 router.patch('/:id',
+    auth,
     [
         check('date')
             .not()
