@@ -53,12 +53,16 @@ exports.userAuthenticated = async (req, res) => {
         const user = await User.findById(req._id);
 
         //Validar si está autorizado
-        if (user.status === 'pendiente' || user.role === '') {
+        if (user.status === 'pendiente') {
             return res.status(401).send({ msg: 'Su usuario está pendiente de autorizar' });
         }
 
-        if (user.status === 'no autorizado' || user.role === '') {
+        if (user.status === 'no autorizado') {
             return res.status(401).send({ msg: 'Su usuario está desautorizado' });
+        }
+
+        if (user.role === '') {
+            return res.status(401).send({ msg: 'Su usuario está sin permisos' });
         }
         
         res.json({ user });
