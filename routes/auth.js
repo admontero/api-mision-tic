@@ -3,14 +3,15 @@ const router = Router();
 const authController = require('../controllers/authController');
 const auth = require('../middleware/auth');
 
-router.post(
-    '/googlelogin', authController.googleLogin
-);
-
 //Devolver usuario autenticado
-router.get('/auth', 
+router.get('/', 
     auth,
     authController.userAuthenticated
 );
+
+router.post('/', 
+    authController.googleLogin
+);
+
 
 module.exports = router;

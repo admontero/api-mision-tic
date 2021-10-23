@@ -14,10 +14,10 @@ connectDB();
 app.use(express.json({ extended: true }));
 
 //Puerto de la app
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 8080;
 
 //Importamos rutas
-app.use('/api', require('./routes/auth'));
+app.use('/api/auth', require('./routes/auth'));
 app.use('/api/productos', require('./routes/products'));
 app.use('/api/usuarios', require('./routes/users'));
 app.use('/api/ventas', require('./routes/purchases'));
