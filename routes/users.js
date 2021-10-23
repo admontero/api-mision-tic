@@ -38,9 +38,6 @@ router.get('/:id',
 router.patch('/:id',
     auth,
     [
-        check('role', 'El rol del usuario es obligatorio')
-            .not()
-            .isEmpty(),
         check('status', 'El estado del usuario es obligatorio')
             .not()
             .isEmpty(),

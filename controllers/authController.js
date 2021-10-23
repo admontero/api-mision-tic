@@ -51,6 +51,16 @@ exports.googleLogin = (req, res) => {
 exports.userAuthenticated = async (req, res) => {
     try {
         const user = await User.findById(req._id);
+
+        //Validar si está autorizado
+        if (user.status === 'pendiente' || user.role === '') {
+            return res.status(401).send({ msg: 'Su usuario está pendiente de autorizar' });
+        }
+
+        if (user.status === 'no autorizado' || user.role === '') {
+            return res.status(401).send({ msg: 'Su usuario está desautorizado' });
+        }
+        
         res.json({ user });
     } catch (error) {
         console.log(error);
